@@ -68,6 +68,7 @@ project/
 │   └── tools/            # Utility scripts (rotation, labeling)
 ├── video/                # Model_test and construction videos
 └── README.md
+```
 
 ## Acknowledgements
 This project was made possible through the guidance and contributions of individuals across different disciplines.
