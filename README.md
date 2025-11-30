@@ -43,7 +43,7 @@ For acquiring the dataset images with the best position of the pick beside the w
 
  ## Why Edge AI and Edge Impulse for this project
 This project targets a real-time microscopy workflow, where a human operator must manipulate C. elegans with a hand-crafted platinum pick under high magnification. The system needs to track worm motion and estimate the pick-tool angle with low and predictable latency to provide visual guidance and avoid damaging the specimen or the agar surface. Streaming video to the cloud would introduce unacceptable delays, depend on network connectivity, and raise privacy concerns for lab data. Running the model directly on a Raspberry Pi 5 (and, in the future, on smaller microcontrollers) turns the solution into a robust, self-contained Edge AI assistant that can be deployed to multiple microscopes at low cost.
-
+![Alt text](images/EdgeMLops.png)
 Edge Impulse is used as the end-to-end MLOps platform for this edge workflow. It manages dataset collection from the microscope, labeling of successful lifting phases, and image preprocessing. Using its vision blocks and the EON Tuner, we explore different combinations of feature extraction and compact CNN architectures that meet strict RAM, flash, and latency constraints on embedded hardware. Once a configuration is selected, Edge Impulse generates an optimized C++/Linux inference SDK that we integrate into the worm-pick-assistant application, enabling real-time inference on the device. The public REST API and project versioning allow us to continuously iterate on the dataset (e.g., new pick shapes or lighting conditions), retrain models, and redeploy updated binaries—implementing a full TinyML MLOps loop tailored for edge devices.
 
 
