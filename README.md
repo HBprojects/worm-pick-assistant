@@ -40,3 +40,5 @@ For acquiring the dataset images with the best position of the pick beside the w
 •	Optional
  o	Motorized XYZ stage
  o	3D-printed tool holder
+
+ ## Why Edge AI and Edge Impulse for this project
