@@ -25,21 +25,18 @@ For acquiring the dataset images with the best position of the pick beside the w
 ![Alt text](images/M_system1.png)
 
 ## Hardware requirements
-•	Raspberry Pi 5
-
-•	Camera
- o	Raspberry Pi Camera Module v2/v3 or
- o	USB microscope (recommended for plate work)
-•	Lighting
- o	LED ring or bottom-illumination
- o	Diffuser sheet for even lighting
-•	Pick
- o	50 mm of Platinum wire 0.3mm Diameter
- o	30 mm x 3mm Dia. Shaft: supporting the platinum wire and  allow the rotation motion of the pick. 
-
-•	Optional
- o	Motorized XYZ stage
- o	3D-printed tool holder
+- Raspberry Pi 5
+- Camera
+  - Raspberry Pi Camera Module v2/v3
+  - USB microscope (recommended for plate work)
+- Lighting
+  - LED ring or bottom-illumination
+  - Diffuser sheet for even lighting
+- Pick
+  - 50 mm of Platinum wire, 0.3 mm diameter
+  - 30 mm x 3 mm shaft: supports the platinum wire and allows rotation motion of the pick
+- Optional
+  - Motorized XYZ stage
 
  ## Application Development
  Why Edge AI and Edge Impulse for this project:
@@ -54,5 +51,20 @@ For model training, an object-detection–oriented impulse was configured using 
 
 Training was performed over 60 epochs, with a learning rate of 0.001, using the CPU training processor. Data Augmentation was enabled to improve robustness against variations in lighting, scale, and tool orientation. The resulting model achieved an overall F1-score of 78.6% on the validation set. The confusion matrix revealed strong performance on the picktool class (100% correct detections), while the worm class showed more variability due to differences in shape, size, and movement. The non-background F1-score reached 0.79, and on-device inference latency was approximately 1 ms when compiled with the EON Compiler (RAM optimized), confirming that the model is suitable for real-time execution on embedded hardware. This training run represents the initial iteration in the project’s MLOps cycle. Future model versions will incorporate larger datasets and active-learning strategies to improve worm detection in challenging microscopic conditions.
 
+## Edge Impulse Integration
+Edge Impulse project link:
+https://studio.edgeimpulse.com/public/837765/live
 
+## Repository Structure
+project/
+│
+├── dataset/              # Raw and annotated images
+├── images/               # Images for README
+├── models/               # Trained models for Raspberry Pi hardware.
+├── src/
+│   ├── RpiCamera/        # Camera capture scripts
+│   ├── notebook/         # Test notebook
+│   └── tools/            # Utility scripts (rotation, labeling)
+├── video/                # construction and model videos
+└── README.md
 
