@@ -40,12 +40,12 @@ For acquiring the dataset images with the best position of the pick beside the w
 
  ## Application Development
  Why Edge AI and Edge Impulse for this project:
-This project targets a real-time microscopy workflow, where a human operator must manipulate C. elegans with a hand-crafted platinum pick under high magnification. The system needs to track worm motion and estimate the pick-tool angle with low and predictable latency to provide visual guidance and avoid damaging the specimen or the agar surface. Streaming video to the cloud would introduce unacceptable delays, depend on network connectivity, and raise privacy concerns for lab data. Running the model directly on a Raspberry Pi 5 (and, in the future, on smaller microcontrollers) turns the solution into a robust, self-contained Edge AI assistant that can be deployed to multiple microscopes at low cost.
+This project targets a real-time microscopy workflow, where a human operator must manipulate C. elegans with a hand-crafted platinum pick under long distance magnification. The system needs to track worm motion and estimate the pick-tool angle with low and predictable latency to provide visual guidance and avoid damaging the specimen or the agar surface. Streaming video to the cloud would introduce unacceptable delays, depend on network connectivity, and raise privacy concerns for lab data. Running the model directly on a Raspberry Pi 5 (and, in the future, on smaller microcontrollers) turns the solution into a robust, self-contained Edge AI assistant that can be deployed to multiple microscopes at low cost.
 ![Alt text](images/imageML.png)
 Edge Impulse is used as the end-to-end MLOps platform for this edge workflow. It manages dataset collection from the microscope, labeling of successful lifting phases, and image preprocessing. Using its vision blocks and the EON Tuner, we explore different combinations of feature extraction and compact CNN architectures that meet strict RAM, flash, and latency constraints on embedded hardware. Once a configuration is selected, Edge Impulse generates an optimized C++/Linux inference SDK that we integrate into the worm-pick-assistant application, enabling real-time inference on the device. The public REST API and project versioning allow us to continuously iterate on the dataset (e.g., new pick shapes or lighting conditions), retrain models, and redeploy updated binaries—implementing a full TinyML MLOps loop tailored for edge devices.
 
 ## Dataset preparation
-To build the dataset, images were captured directly from the microscope using a Raspberry Pi and a USB camera, covering different worm positions and pick-tool orientations during the lifting phase. The initial dataset contains 19 samples, automatically organized into a 96%/4% train/test split. Each image was manually labeled inside Edge Impulse using bounding boxes for the picktool and worm classes, ensuring the model can reliably distinguish both objects under variations in lighting, focus, and tool angle. The labeling process involved carefully selecting representative samples that capture changes in background texture, distance, and pick-tool geometry, reflecting realistic conditions of the microscopy workflow. This dataset forms the foundation of the subsequent MLOps pipeline and will be expanded progressively through active learning as the system identifies challenging or ambiguous samples during real-time inference.
+To build the dataset, images were captured directly from the microscope using a Raspberry Pi and a Rpi HQ camera, covering different worm positions and pick-tool orientations during the lifting phase. The initial dataset contains 19 samples, automatically organized into a 96%/4% train/test split. Each image was manually labeled inside Edge Impulse using bounding boxes for the picktool and worm classes, ensuring the model can reliably distinguish both objects under variations in lighting, focus, and tool angle. The labeling process involved carefully selecting representative samples that capture changes in background texture, distance, and pick-tool geometry, reflecting realistic conditions of the microscopy workflow. This dataset forms the foundation of the subsequent MLOps pipeline and will be expanded progressively through active learning as the system identifies challenging or ambiguous samples during real-time inference.
 ## Model Training
 For model training, an object-detection–oriented impulse was configured using 96×96 px square images, resized with the Fit shortest option to preserve spatial consistency across samples. The DSP block was kept in RGB to retain the relevant color information inherent to the microscope’s blue-illuminated environment. The selected architecture was FOMO (Faster Objects, More Objects) using MobileNetV2 0.35, a lightweight convolutional network optimized for edge devices such as the Raspberry Pi. FOMO is particularly effective for detecting multiple small objects—here, worms and the pick-tool tip—with very low inference latency. 
 
@@ -66,6 +66,14 @@ project/
 │   ├── RpiCamera/        # Camera capture scripts
 │   ├── notebook/         # Test notebook
 │   └── tools/            # Utility scripts (rotation, labeling)
-├── video/                # construction and model videos
+├── video/                # Model_test and construction videos
 └── README.md
 
+## Acknowledgements
+This project was made possible through the guidance and contributions of individuals across different disciplines.
+### GitHub Contributors
+- Jefferson Sarmiento (https://github.com/jsarmientor) – Computer Science A.I. Developer
+- Hernan Bernal (https://github.com/HBprojects)) – Mechanical designer
+### Non-GitHub Contributors
+- Prof. Alejandra Mantilla (Biology) – Advised on biological evaluation of results
+- Dr. Rodrigo Gonzales (Neuroscience) – Advised on biological requirements
