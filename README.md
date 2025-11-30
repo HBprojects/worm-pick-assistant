@@ -73,7 +73,7 @@ project/
 ## Acknowledgements
 This project was made possible through the guidance and contributions of individuals across different disciplines.
 ### GitHub Contributors
-- Jefferson Sarmiento (https://github.com/jsarmientor) – Computer Science A.I. Developer
+- Jefferson Sarmiento (https://www.linkedin.com/in/jefferson-sarmiento-rojas-3797ab192) – Professional TinyML Developrand and Applied TinyML Learning for Scale.
 - Hernan Bernal (https://github.com/HBprojects)) – Mechanical designer
 ### Non-GitHub Contributors
 - Prof. Alejandra Mantilla (Biology) – Advised on biological evaluation of results
