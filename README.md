@@ -56,6 +56,7 @@ Edge Impulse project link:
 https://studio.edgeimpulse.com/public/837765/live
 
 ## Repository Structure
+```text
 project/
 │
 ├── dataset/              # Raw and annotated images
